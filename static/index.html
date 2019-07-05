@@ -16,10 +16,21 @@
     $(() => {
         let socket = io('ws://127.0.0.1:3000');
 
-        socket.emit('getData', 'fuck');
+        // let i = 1;
+        // setInterval(() => {
+        //     socket.emit('getData', {"seq": i});
+        //     i = i + 1;
+        //     console.log(i);
+        // }, 5000);
+
         socket.on('serverMsg', (msg) => {
-            for (let i in msg.data) {
-                console.log(msg.data[i]);
+            if (msg.message) {
+                console.log(msg.message);
+                return;
+            }
+
+            for (let idx in msg.data) {
+                console.log(msg.data[idx]);
             }
         });
 
